@@ -36,7 +36,7 @@ namespace Meta.XR.MCP.Extension.Editor
 
         private const string Description = "Adds a camera rig (OVRCameraRig) from Meta XR Core SDK. It is a custom XR rig that replaces Unity's conventional Main Camera. Under the camera rig it contains the anchor objects for eyes and hands/controllers. \nThe camera rig also includes the OVRManager component for all Meta Quest settings (including reflecting the OVRProjectConfig located at Assets/Oculus/OculusProjectConfig.asset).";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" }, EnabledByDefault = true)]
         public static object HandleCommand()
         {
             UsageTelemetry.OnToolUsed(ToolName);

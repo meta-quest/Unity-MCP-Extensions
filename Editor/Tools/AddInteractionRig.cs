@@ -40,7 +40,7 @@ namespace Meta.XR.MCP.Extension.Editor
 
         private const string Description = "Adds the comprehensive interaction rig (OVRInteractionComprehensive prefab) from Interaction SDK as a child of the Camera Rig. This rig contains all interactors required for the user to interact in the scene with hands or controllers, like grab, distance grab, teleport, locomotion, etc.\nIt requires the Camera Rig to be added first.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" }, EnabledByDefault = true)]
         public static object HandleCommand()
         {
             UsageTelemetry.OnToolUsed(ToolName);

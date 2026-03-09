@@ -32,7 +32,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_get_interactors_state";
         private const string Description = "Get all the interactors from the Interaction rig. It will provide the state (enable/disable) of the interactor GameObject. You can enable/disable it by changing the state of the GameObject. When modifying the state, ensure to use search_inactive = true.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" }, EnabledByDefault = true)]
         public static object HandleCommand()
         {
             UsageTelemetry.OnToolUsed(ToolName);

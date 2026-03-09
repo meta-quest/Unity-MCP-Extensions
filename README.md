@@ -22,7 +22,7 @@ In Unity, add the following packages using the Package Manager:
   (`com.meta.xr.sdk.core`): v78 or later
 - [Meta Interaction SDK](https://assetstore.unity.com/packages/tools/integration/meta-xr-interaction-sdk-265014)
   (`com.meta.xr.sdk.interaction.ovr`): v78 or later
-- Unity MCP (`com.unity.ai.mcp`): Access to the
+- Unity Assistant (`com.unity.ai.assistant`): Access to the
   [Unity AI Gateway](https://create.unity.com/UnityAIGatewayBeta) is required
 
 Then, [install this package](https://docs.unity3d.com/Manual/upm-ui-giturl.html)

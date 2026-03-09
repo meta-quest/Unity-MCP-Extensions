@@ -35,7 +35,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_add_teleport_hotspot";
         private const string Description = "Place a teleport hotspot in the scene. The player will be able to teleport to that position. Need the position field.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "locomotion" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "locomotion" }, EnabledByDefault = true)]
         public static object HandleCommand(JObject @params)
         {
             UsageTelemetry.OnToolUsed(ToolName);

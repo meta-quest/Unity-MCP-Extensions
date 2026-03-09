@@ -1,11 +1,12 @@
 {
   "name": "com.meta.xr.unity-mcp.extension",
   "displayName": "Meta XR Unity MCP Extension",
-  "version": "0.1.0-exp.1",
-  "unity": "2022.3",
+  "version": "2.0.0-pre.1",
+  "unity": "6000.0",
+  "unityRelease": "60f1",
   "description": "Register Meta XR tools to Unity MCP.",
   "dependencies": {
-    "com.unity.ai.mcp": "0.1.0-exp.1"
+    "com.unity.ai.assistant": "2.0.0-pre.1"
   },
   "documentationUrl": "README.md",
   "changelogUrl": "CHANGELOG.md",

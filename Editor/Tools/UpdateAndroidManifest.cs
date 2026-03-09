@@ -32,7 +32,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_update_android_manifest";
         private const string Description = "After changes to the OculusProjectConfig(Assets/Oculus/OculusProjectConfig.asset) file (Meta XR settings) or the OVRManager script, we need to make sure the manifest is updated by calling this function.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" }, EnabledByDefault = true)]
         public static object HandleCommand()
         {
             UsageTelemetry.OnToolUsed(ToolName);

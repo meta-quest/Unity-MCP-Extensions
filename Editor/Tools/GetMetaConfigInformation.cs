@@ -30,7 +30,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_get_config_information";
         private const string Description = "Run this tool at least once before running any `meta_` tools. This will give you system information on the configuration files and additional information to better understand how to modify them.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest" }, EnabledByDefault = true)]
         public static object HandleCommand()
         {
             UsageTelemetry.OnToolUsed(ToolName);

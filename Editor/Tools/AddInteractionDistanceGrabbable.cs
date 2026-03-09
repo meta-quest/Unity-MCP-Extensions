@@ -34,7 +34,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_add_distance_grabbable";
         private const string Description = "Specify a target gameObject to setup the distance grabbable component for the player to be able to grab it from a distance. Need an interaction rig.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" }, EnabledByDefault = true)]
         public static object HandleCommand(TargetGameObjectParams parameters)
         {
             UsageTelemetry.OnToolUsed(ToolName);

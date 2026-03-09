@@ -34,7 +34,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_add_canvas_interaction_ray";
         private const string Description = "Specify a gameObject with a canvas to add ray interaction. Canvas must be in world space. The player will be able to use a ray to interact with interactable on a canvas (like buttons).";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction", "ui" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction", "ui" }, EnabledByDefault = true)]
         public static object HandleCommand(TargetGameObjectParams parameters)
         {
             UsageTelemetry.OnToolUsed(ToolName);

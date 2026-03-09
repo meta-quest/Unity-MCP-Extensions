@@ -34,7 +34,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_add_grabbable";
         private const string Description = "Specify a target gameObject to setup the grabbable component for the player to be able to grab it. Need an interaction rig.";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" }, EnabledByDefault = true)]
         public static object HandleCommand(TargetGameObjectParams parameters)
         {
             UsageTelemetry.OnToolUsed(ToolName);

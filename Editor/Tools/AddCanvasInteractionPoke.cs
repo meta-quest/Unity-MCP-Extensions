@@ -34,7 +34,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string ToolName = "meta_add_canvas_interaction_poke";
         private const string Description = "Specify a gameObject with a canvas to add poke interaction. Canvas must be in world space. The player will be able to poke, using hands and controllers, the interactable on a canvas (like buttons).";
 
-        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction", "ui" })]
+        [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction", "ui" }, EnabledByDefault = true)]
         public static object HandleCommand(TargetGameObjectParams parameters)
         {
             UsageTelemetry.OnToolUsed(ToolName);
