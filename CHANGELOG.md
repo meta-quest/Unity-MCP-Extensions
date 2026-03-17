@@ -6,6 +6,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.0.0-pre.2]
+
+### Fixed
+
+- Load interaction rig prefab by GUID instead of hardcoded path for compatibility across SDK versions.
+
 ## [2.0.0-pre.1] - 2026-03-04
 
 ### Update for Unity AI Assistant

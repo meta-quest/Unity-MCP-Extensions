@@ -36,9 +36,13 @@ namespace Meta.XR.MCP.Extension.Editor
     public static class AddInteractionRig
     {
         public const string ToolName = "meta_add_interactionrig";
-        private const string InteractionRigPrefabPath = "Packages/com.meta.xr.sdk.interaction.ovr/Runtime/Prefabs/OVRInteractionComprehensive.prefab";
 
-        private const string Description = "Adds the comprehensive interaction rig (OVRInteractionComprehensive prefab) from Interaction SDK as a child of the Camera Rig. This rig contains all interactors required for the user to interact in the scene with hands or controllers, like grab, distance grab, teleport, locomotion, etc.\nIt requires the Camera Rig to be added first.";
+        // Stable GUID for the comprehensive interaction rig prefab.
+        // Using GUID lookup instead of a hardcoded path so the tool
+        // continues to work if the prefab is renamed in future versions.
+        private const string InteractionRigPrefabGuid = "0a7d2469f24041c4284c66706f84c45e";
+
+        private const string Description = "Adds the comprehensive interaction rig from Interaction SDK as a child of the Camera Rig. This rig contains all interactors required for the user to interact in the scene with hands or controllers, like grab, distance grab, teleport, locomotion, etc.\nIt requires the Camera Rig to be added first.";
 
         [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" }, EnabledByDefault = true)]
         public static object HandleCommand()
@@ -53,7 +57,15 @@ namespace Meta.XR.MCP.Extension.Editor
             var interactionRigRef = cameraRig.GetComponentInChildren<OVRCameraRigRef>();
             if (interactionRigRef == null)
             {
-                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(InteractionRigPrefabPath);
+                var prefabPath = AssetDatabase.GUIDToAssetPath(InteractionRigPrefabGuid);
+                if (string.IsNullOrEmpty(prefabPath))
+                {
+                    const string errorMsg = "Comprehensive interaction rig prefab not found. Ensure Interaction SDK is installed.";
+                    UsageTelemetry.OnToolError(ToolName, errorMsg);
+                    return Response.Error(errorMsg);
+                }
+
+                var prefab = AssetDatabase.LoadAssetAtPath<GameObject>(prefabPath);
                 var interactionRig = PrefabUtility.InstantiatePrefab(prefab) as GameObject;
 
                 if (interactionRig != null)
@@ -66,14 +78,14 @@ namespace Meta.XR.MCP.Extension.Editor
                 }
                 else
                 {
-                    const string errorMsg = "OVRInteractionComprehensive prefab failed to instantiate";
+                    const string errorMsg = "Comprehensive interaction rig prefab failed to instantiate";
                     UsageTelemetry.OnToolError(ToolName, errorMsg);
                     return Response.Error(errorMsg);
                 }
             }
 
             UsageTelemetry.OnToolSuccess(ToolName);
-            return Response.Success($"Interaction Rig is in the scene", GameObjectSerializer.GetGameObjectData(interactionRigRef.gameObject));
+            return Response.Success("Interaction Rig is in the scene", GameObjectSerializer.GetGameObjectData(interactionRigRef.gameObject));
         }
     }
 }
