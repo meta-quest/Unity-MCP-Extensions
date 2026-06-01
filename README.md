@@ -1,7 +1,7 @@
 # Meta XR Unity MCP Extension
 
 This package extends the Unity MCP package (`com.unity.ai.mcp`), which is part
-of the Unity AI Gateway
+of the Unity AI Suite
 ([Beta Early Access](https://create.unity.com/UnityAIGatewayBeta)), with
 additional Meta-specific tools.
 
@@ -12,8 +12,7 @@ comprehensive list.
 
 # Installation
 
-Get access to the Unity AI Gateway Beta Early Access by following the
-instructions on the
+Get access to Unity's AI Gateway by following the instructions on the
 [Unity AI Gateway](https://create.unity.com/UnityAIGatewayBeta) page.
 
 In Unity, add the following packages using the Package Manager:
