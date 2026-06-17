@@ -6,6 +6,18 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to
 [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [2.12.0-pre.2]
+
+### Update
+
+- Update dependencies to Unity AI Assistant 2.12.0-pre.2
+
+### Added
+
+- Skill Importer window (`Meta ▸ MCP Extension ▸ Import Meta Skills...`) to browse and import Meta XR skills from [meta-quest/agentic-tools](https://github.com/meta-quest/agentic-tools); skills with "unity" in the name are shown by default.
+- Imports to a selectable AI agent (AI Assistant, Claude, Codex, Copilot, Cursor, Gemini, OpenCode); the AI Assistant supports Project (`Assets/MetaSkills`) or User skills.
+- Flags already-installed and outdated skills, shows the AI Assistant allow/deny state, and can auto-open once per Editor session. Settings are stored per project (via EditorUserSettings).
+
 ## [2.6.0-pre.1]
 
 ### Update

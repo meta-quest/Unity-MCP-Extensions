@@ -66,6 +66,27 @@ services:
   information it's then possible for the AI agent to modify the state of the
   interactors.
 
+# Skill Importer
+
+This package also includes an editor window for importing Meta XR _skills_ —
+reusable instructions that guide an AI agent through Meta XR workflows — from the
+[meta-quest/agentic-tools](https://github.com/meta-quest/agentic-tools)
+repository.
+
+Open it from the menu: **Meta ▸ MCP Extension ▸ Import Meta Skills...**
+
+- Skills with "unity" in the name are shown by default; toggle **Show all
+  skills** for the rest.
+- Pick a target with **Import to**: the Unity AI Assistant, or another agent
+  (Claude, Codex, Copilot, Cursor, Gemini, OpenCode) written to that tool's
+  skills folder. For the AI Assistant, choose **Project Skills**
+  (`Assets/MetaSkills`) or **User Skills**.
+- Already-installed and outdated skills are flagged. For the AI Assistant, each
+  skill's allow/deny state is shown — use **Open Preferences ▸ AI ▸ Skills** to
+  allow them.
+- **Auto-open on Editor launch** (bottom of the window) controls whether it
+  opens once per session: always, only when updates are available, or never.
+
 # License
 
 This package is licensed under the

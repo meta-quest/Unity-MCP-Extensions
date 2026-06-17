@@ -1,0 +1,53 @@
+/*
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ * All rights reserved.
+ *
+ * Licensed under the Oculus SDK License Agreement (the "License");
+ * you may not use the Oculus SDK except in compliance with the License,
+ * which is provided at the time of installation or download, or which
+ * otherwise accompanies this software in either electronic or hard copy form.
+ *
+ * You may obtain a copy of the License at
+ *
+ * https://developer.oculus.com/licenses/oculussdk/
+ *
+ * Unless required by applicable law or agreed to in writing, the Oculus SDK
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+#if META_INTERACTION_SDK
+using Oculus.Interaction.Editor.QuickActions;
+using Unity.AI.MCP.Editor.ToolRegistry;
+
+namespace Meta.XR.MCP.Extension.Editor
+{
+    /// <summary>
+    /// Params for the teleport hotspot tool. Position is a 3-element world
+    /// space coordinate; Snap controls how the player snaps on teleport.
+    /// </summary>
+    public record TeleportHotspotParams
+    {
+        private const string SnapDescription =
+            "Snap behavior on teleport. SnapPosition (default) snaps the player's "
+          + "position; SnapPositionAndRotation also snaps rotation to face the hotspot's "
+          + "forward; None teleports to the exact point with no snapping.";
+
+        [McpDescription("World position [x,y,z]", Required = true)]
+        public float[] Position { get; set; }
+
+#if META_INTERACTION_SDK_QUICK_ACTIONS_API
+        [McpDescription(SnapDescription, EnumType = typeof(TeleportHotspotSnap))]
+        public TeleportHotspotSnap Snap { get; set; } = TeleportHotspotSnap.SnapPosition;
+#else
+        // TeleportWizard.TeleportHotspotSnapType is internal in pre-v205 ISDK; expose as
+        // string with EnumType so the schema still constrains LLM-supplied values to valid
+        // names. Parsed back to the enum at the call site.
+        [McpDescription(SnapDescription, EnumType = typeof(TeleportWizard.TeleportHotspotSnapType))]
+        public string Snap { get; set; } = nameof(TeleportWizard.TeleportHotspotSnapType.SnapPosition);
+#endif
+    }
+}
+#endif

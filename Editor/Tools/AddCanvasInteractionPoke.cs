@@ -50,7 +50,12 @@ namespace Meta.XR.MCP.Extension.Editor
                 UsageTelemetry.OnToolError(ToolName, "GameObject doesn't have a Canvas component.");
                 return Response.Error($"Target GameObject ('{parameters.NameOrID}') doesn't have a Canvas component.");
             }
+#if META_INTERACTION_SDK_QUICK_ACTIONS_API
+            canvas.renderMode = RenderMode.WorldSpace;
+            var updatedObjects = QuickActionsAPI.AddPokeCanvasInteraction(canvas.gameObject);
+#else
             var updatedObjects = InteractionUtils.AddCanvasInteraction<PokeCanvasWizard>(canvas);
+#endif
 
             var data = SetupUtilities.BuildDataForUpdatedGameObjects(targetGo, updatedObjects);
 

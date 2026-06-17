@@ -19,7 +19,6 @@
  */
 
 #if META_INTERACTION_SDK
-using Newtonsoft.Json.Linq;
 using Oculus.Interaction.Editor.QuickActions;
 using Unity.AI.MCP.Editor.Helpers;
 using Unity.AI.MCP.Editor.ToolRegistry;
@@ -36,44 +35,38 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string Description = "Place a teleport hotspot in the scene. The player will be able to teleport to that position. Need the position field.";
 
         [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "locomotion" }, EnabledByDefault = true)]
-        public static object HandleCommand(JObject @params)
+        public static object HandleCommand(TeleportHotspotParams parameters)
         {
             UsageTelemetry.OnToolUsed(ToolName);
-            var position = Vector3Helper.ParseVector3(@params["position"] as JArray);
+
+            if (parameters.Position == null || parameters.Position.Length < 3)
+            {
+                UsageTelemetry.OnToolError(ToolName, "Invalid position");
+                return Response.Error("Position must be a 3-element array [x,y,z].");
+            }
+
+            var position = new Vector3(parameters.Position[0], parameters.Position[1], parameters.Position[2]);
 
             var targetGo = new GameObject("TeleportHotspot");
             targetGo.transform.position = position;
 
-            var createdObjects = InteractionUtils.AddInteractable<TeleportWizard>(targetGo);
+#if META_INTERACTION_SDK_QUICK_ACTIONS_API
+            var createdObjects = QuickActionsAPI.AddTeleportInteraction(targetGo,
+                TeleportSurfaceType.Hotspot, parameters.Snap);
+#else
+            if (!System.Enum.TryParse<TeleportWizard.TeleportHotspotSnapType>(
+                    parameters.Snap, ignoreCase: true, out var snap))
+            {
+                snap = TeleportWizard.TeleportHotspotSnapType.SnapPosition;
+            }
+            var createdObjects = InteractionUtils.AddInteractable<TeleportWizard>(targetGo,
+                wizard => wizard.InjectOptionalHotspotType(null, snap, null));
+#endif
 
             var data = SetupUtilities.BuildDataForUpdatedGameObjects(targetGo, createdObjects);
 
             UsageTelemetry.OnToolSuccess(ToolName);
             return Response.Success("Hotspot added", data);
-        }
-
-        /// <summary>
-        /// Returns the input schema for this tool.
-        /// </summary>
-        [McpSchema("meta_add_teleport_hotspot")]
-        public static object GetInputSchema()
-        {
-            return new
-            {
-                type = "object",
-                properties = new
-                {
-                    position = new
-                    {
-                        type = "array",
-                        description = "World position [x,y,z]",
-                        items = new { type = "number" },
-                        min_items = 3,
-                        max_items = 3
-                    },
-                },
-                required = new[] { "position" },
-            };
         }
     }
 }

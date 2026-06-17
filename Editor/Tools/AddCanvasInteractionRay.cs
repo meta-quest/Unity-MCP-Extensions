@@ -52,7 +52,12 @@ namespace Meta.XR.MCP.Extension.Editor
                     $"Target GameObject ('{parameters.NameOrID}') doesn't have a Canvas component."
                 );
             }
+#if META_INTERACTION_SDK_QUICK_ACTIONS_API
+            canvas.renderMode = RenderMode.WorldSpace;
+            var updatedObjects = QuickActionsAPI.AddRayCanvasInteraction(canvas.gameObject);
+#else
             var updatedObjects = InteractionUtils.AddCanvasInteraction<RayCanvasWizard>(canvas);
+#endif
 
             var data = SetupUtilities.BuildDataForUpdatedGameObjects(targetGo, updatedObjects);
 

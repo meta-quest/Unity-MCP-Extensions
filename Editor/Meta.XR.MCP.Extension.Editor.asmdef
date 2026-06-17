@@ -7,7 +7,8 @@
         "GUID:d2761a0af0f567748a72629d4bb18a26",
         "GUID:2a230cb87a1d3ba4a98bdc0ddae76e6c",
         "GUID:7040c93f6035f5749888e6fdf5ef28f8",
-        "GUID:48af58ae5328ff048acacd924604a804"
+        "GUID:48af58ae5328ff048acacd924604a804",
+        "GUID:ac6f6d26602ccd34383cd68b90e9941b"
     ],
     "includePlatforms": [
         "Editor"
@@ -28,6 +29,11 @@
             "name": "com.meta.xr.sdk.interaction.ovr",
             "expression": "78.0.0",
             "define": "META_INTERACTION_SDK"
+        },
+        {
+            "name": "com.meta.xr.sdk.interaction.ovr",
+            "expression": "205.0.0-0",
+            "define": "META_INTERACTION_SDK_QUICK_ACTIONS_API"
         }
     ],
     "noEngineReferences": false

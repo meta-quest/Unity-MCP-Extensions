@@ -47,7 +47,12 @@ namespace Meta.XR.MCP.Extension.Editor
                 );
             }
 
+#if META_INTERACTION_SDK_QUICK_ACTIONS_API
+            QuickActionsAPI.AddGrabInteraction(targetGo);
+            var grabIntractable = targetGo.GetComponentInChildren<GrabInteractable>();
+#else
             var grabIntractable = InteractionUtils.AddInteractable<GrabInteractable, GrabWizard>(targetGo);
+#endif
             if (grabIntractable == null)
             {
                 UsageTelemetry.OnToolError(ToolName, "Error occured when adding grabbable to GameObject");

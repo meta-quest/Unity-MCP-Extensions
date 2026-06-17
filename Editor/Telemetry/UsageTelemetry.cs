@@ -1,4 +1,4 @@
-﻿/*
+/*
  * Copyright (c) Meta Platforms, Inc. and affiliates.
  * All rights reserved.
  *
@@ -49,6 +49,45 @@ namespace Meta.XR.MCP.Extension.Editor
         public static void OnToolError(string toolName, string errorMsg)
         {
             SendEvent("tool_error", toolName);
+        }
+
+        /// <summary>The Skill Importer window was opened (param: how, e.g. "menu" or "auto_launch").</summary>
+        public static void OnSkillImporterOpened(string source)
+        {
+            SendEvent("skill_importer_opened", source);
+        }
+
+        /// <summary>The "Auto-open on Editor launch" setting was changed (param: the new mode).</summary>
+        public static void OnSkillImporterAutoLaunchChanged(string mode)
+        {
+            SendEvent("skill_importer_auto_launch_changed", mode);
+        }
+
+        /// <summary>The target AI agent was changed in the Skill Importer (param: the agent).</summary>
+        public static void OnSkillImporterAgentSelected(string aiAgent)
+        {
+            SendEvent("skill_importer_agent_selected", aiAgent);
+        }
+
+        /// <summary>
+        /// A skill was imported (param: "skillName|target", where target is the
+        /// agent, suffixed with the scope for the AI Assistant, e.g. "AiAssistant:Project").
+        /// </summary>
+        public static void OnSkillImported(string skillName, string target)
+        {
+            SendEvent("skill_imported", $"{skillName}|{target}");
+        }
+
+        /// <summary>A skill failed to import (param: "skillName|target").</summary>
+        public static void OnSkillImportFailed(string skillName, string target)
+        {
+            SendEvent("skill_import_failed", $"{skillName}|{target}");
+        }
+
+        /// <summary>The AI Assistant skills preferences were opened from the Skill Importer.</summary>
+        public static void OnSkillImporterPreferencesOpened()
+        {
+            SendEvent("skill_importer_preferences_opened");
         }
 
         [Conditional("META_CORE_SDK")]

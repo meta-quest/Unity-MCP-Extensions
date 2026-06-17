@@ -35,7 +35,7 @@ namespace Meta.XR.MCP.Extension.Editor
         private const string Description = "Specify a target gameObject to setup the distance grabbable component for the player to be able to grab it from a distance. Need an interaction rig.";
 
         [McpTool(ToolName, Description, Groups = new[] { "meta", "quest", "interaction" }, EnabledByDefault = true)]
-        public static object HandleCommand(TargetGameObjectParams parameters)
+        public static object HandleCommand(DistanceGrabbableParams parameters)
         {
             UsageTelemetry.OnToolUsed(ToolName);
             var targetGo = SetupUtilities.GetTargetGameObject(parameters.NameOrID);
@@ -46,8 +46,18 @@ namespace Meta.XR.MCP.Extension.Editor
                     $"Target GameObject ('{parameters.NameOrID}') not found."
                 );
             }
+#if META_INTERACTION_SDK_QUICK_ACTIONS_API
+            QuickActionsAPI.AddDistanceGrabInteraction(targetGo, parameters.Mode);
+            var grabIntractable = targetGo.GetComponentInChildren<DistanceGrabInteractable>();
+#else
+            if (!System.Enum.TryParse<DistanceGrabWizard.Mode>(
+                    parameters.Mode, ignoreCase: true, out var mode))
+            {
+                mode = DistanceGrabWizard.Mode.InteractableToHand;
+            }
             var grabIntractable = InteractionUtils.AddInteractable<DistanceGrabInteractable, DistanceGrabWizard>(targetGo,
-                (wizard) => wizard.InjectMode(DistanceGrabWizard.Mode.InteractableToHand));
+                (wizard) => wizard.InjectMode(mode));
+#endif
             if (grabIntractable == null)
             {
                 UsageTelemetry.OnToolError(ToolName, "Error occured when adding distance grabbable");
