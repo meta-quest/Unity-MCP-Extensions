@@ -322,7 +322,7 @@ namespace Meta.XR.MCP.Extension.Editor
                 {
                     var wasSelected = _selected.Contains(entry.Id);
                     var isSelected = EditorGUILayout.ToggleLeft(
-                        entry.DisplayName, wasSelected, EditorStyles.boldLabel);
+                        entry.DisplayName, wasSelected, EditorStyles.boldLabel, GUILayout.ExpandWidth(true));
                     if (isSelected != wasSelected)
                     {
                         if (isSelected)
@@ -335,7 +335,6 @@ namespace Meta.XR.MCP.Extension.Editor
                         }
                     }
 
-                    GUILayout.FlexibleSpace();
                     DrawSkillStatus(entry);
                 }
 
